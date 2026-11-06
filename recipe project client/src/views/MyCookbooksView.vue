@@ -2,6 +2,7 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import CookbookCard from '../components/CookbookCard.vue'
+import { removeRecipesOf } from '../stores/recipes'
 import {
   cookbooks,
   folders,
@@ -134,6 +135,7 @@ function removeFolder() {
 
 function removeBook(id) {
   deleteCookbook(id)
+  removeRecipesOf(id)
   confirmingBook.value = null
 }
 

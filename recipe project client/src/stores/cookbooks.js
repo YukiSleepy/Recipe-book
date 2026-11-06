@@ -4,13 +4,6 @@ import { DEFAULT_COLOR } from '../utils/color'
 const BOOKS_KEY = 'cookbooks'
 const FOLDERS_KEY = 'folders'
 
-// Colours from the first version, so cookbooks you already made keep their colour.
-const LEGACY_TONES = {
-  butter: '#f5cb5c',
-  herb: '#3e7c59',
-  tomato: '#c8371d',
-  blue: '#2f5d8a',
-}
 
 function read(key) {
   try {
