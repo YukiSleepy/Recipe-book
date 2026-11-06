@@ -95,6 +95,9 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', onDocumentPoin
 
       <ul v-if="open" ref="menu" class="menu" role="menu" @keydown="onMenuKey">
         <li role="none">
+          <RouterLink :to="`/cookbook/${book.id}/new-recipe`" class="item" role="menuitem">Add recipe</RouterLink>
+        </li>
+        <li role="none">
           <RouterLink :to="`/edit/${book.id}`" class="item" role="menuitem">Edit</RouterLink>
         </li>
         <li role="none">
