@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import CreateCookbookView from '../views/CreateCookbookView.vue'
 import EditCookbookView from '../views/EditCookbookView.vue'
@@ -7,7 +7,7 @@ import CreateRecipeView from '../views/CreateRecipeView.vue'
 import CookbookView from '../views/CookbookView.vue'
 
 export default createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
     { path: '/', name: 'home', component: HomeView },
     { path: '/create', name: 'create', component: CreateCookbookView },
