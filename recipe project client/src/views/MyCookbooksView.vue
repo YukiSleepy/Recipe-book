@@ -18,6 +18,13 @@ import {
 const route = useRoute()
 const router = useRouter()
 
+// Open a cookbook when its box is clicked (but not when a button, link
+// or input inside the box was clicked, like the star or the delete buttons)
+function openBook(event, id) {
+  if (event.target.closest('button, a, input, label, select, textarea')) return
+  router.push({ name: 'cookbook', params: { id } })
+}
+
 // No folder id in the address = the main list
 const folderId = computed(() => route.params.folderId || null)
 const folder = computed(() => folders.find((f) => f.id === folderId.value) || null)
@@ -294,7 +301,7 @@ function onDrop(targetFolderId) {
       >
         <h2 v-if="group.title" :id="`heading-${group.key}`" class="section-title">{{ group.title }}</h2>
         <ul class="shelf">
-          <li v-for="book in group.books" :key="book.id">
+          <li v-for="book in group.books" :key="book.id" class="book-item" @click="openBook($event, book.id)">
             <CookbookCard
               :book="book"
               :folder-name="folderNameOf(book)"
@@ -423,5 +430,9 @@ function onDrop(targetFolderId) {
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+.book-item {
+  cursor: pointer;
 }
 </style>
