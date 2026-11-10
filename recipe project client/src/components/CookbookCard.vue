@@ -74,7 +74,14 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', onDocumentPoin
     @dragstart="onDragStart"
     @dragend="$emit('drag-end')"
   >
-    <CookbookCover :book="book" />
+    <RouterLink
+      :to="{ name: 'cookbook', params: { id: book.id } }"
+      class="cover-link"
+      draggable="false"
+      :aria-label="`Open ${book.name}`"
+    >
+      <CookbookCover :book="book" />
+    </RouterLink>
 
     <div ref="wrap" class="menu-wrap">
       <button
@@ -94,9 +101,6 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', onDocumentPoin
       </button>
 
       <ul v-if="open" ref="menu" class="menu" role="menu" @keydown="onMenuKey">
-        <li role="none">
-          <RouterLink :to="`/cookbook/${book.id}/new-recipe`" class="item" role="menuitem">Add recipe</RouterLink>
-        </li>
         <li role="none">
           <RouterLink :to="`/edit/${book.id}`" class="item" role="menuitem">Edit</RouterLink>
         </li>
@@ -140,6 +144,9 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', onDocumentPoin
 .card { position: relative; display: flex; flex-direction: column; gap: 0.75rem; cursor: grab; }
 .card.dragging { opacity: 0.45; }
 .card > .hint { margin-top: -0.25rem; }
+
+.cover-link { display: block; color: inherit; text-decoration: none; border-radius: var(--radius-sm); }
+.cover-link:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 
 .confirm { display: flex; flex-direction: column; gap: 0.75rem; }
 .row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
